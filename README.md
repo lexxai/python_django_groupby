@@ -1,5 +1,6 @@
 # python_django_groupby
 
+![](doc/db_01.png)
 
 
 ## DJANGO реалізація.
@@ -39,4 +40,77 @@ Operations to perform:
 Running migrations:
   Applying loganalyze.0001_initial... OK 
 ```
+
+## Import DATA. DBeaver
+
+![](doc/db_02.png)
+
+Add index.template: groupby\loganalyze\templates\loganalyze\index.html
+
+## Django view
+
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index GroupBy</title>
+</head>
+<body>
+  <h1>HELLO GroupBy</h1>
+</body>
+</html>
+```
+
+
+groupby\loganalyze\views.py:
+```
+from django.shortcuts import render
+
+
+# Create your views here.
+def main(request):
+    return render(request, 'loganalyze/index.html')
+```
+
+groupby\loganalyze\urls.py:
+
+```
+from django.urls import path
+from . import views
+
+app_name = 'loganalyze'
+
+urlpatterns = [
+    path('', views.main, name='main'),
+]
+```
+
+groupby\groupby\urls.py:
+
+```
+from django.contrib import admin
+from django.urls import include, path
+
+urlpatterns = [
+    path("admin/", admin.site.urls),
+    path('', include('loganalyze.urls')),
+]
+```
+
+```
+> python manage.py runserver
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+December 03, 2023 - 19:38:03
+Django version 4.2.7, using settings 'groupby.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CTRL-BREAK.
+```
+
+![](doc/web-01.png)
+
 
