@@ -152,3 +152,10 @@ Tune template:
 ```
 
 ![](doc/web-02.png)
+
+View serch user1:
+```
+    data = Log.objects.filter(username__exact = "user1")
+```
+
+![](doc/web-03.png)
