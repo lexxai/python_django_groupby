@@ -153,9 +153,18 @@ Tune template:
 
 ![](doc/web-02.png)
 
-View serch user1:
+View, search username "user1":
 ```
     data = Log.objects.filter(username__exact = "user1")
 ```
 
 ![](doc/web-03.png)
+
+
+View, search username "user1" and group by "host" by use Django raw sql request:
+```
+    data = Log.objects.raw("SELECT x.* FROM loganalyze_log x WHERE x.username = %s GROUP BY x.host", ["user1"])
+
+```
+
+![](doc/web-04.png)
