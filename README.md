@@ -113,4 +113,42 @@ Quit the server with CTRL-BREAK.
 
 ![](doc/web-01.png)
 
+Tune view:
+```
+from django.shortcuts import render
+from .models import Log
 
+# Create your views here.
+def main(request):
+    data = Log.objects.all()
+    context=  {"data":data}
+    return render(request, 'loganalyze/index.html', context=context)
+```
+
+Tune template:
+```
+  <table class="table table-sm table-bordered table-striped col-auto">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">date</th>
+        <th scope="col">host</th>
+        <th scope="col">request</th>
+        <th scope="col">username</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in data %}
+      <tr>
+        <th scope="row">{{row.id}}</td>
+        <td>{{row.date}}</td>
+        <td>{{row.host}}</td>
+        <td>{{row.request}}</td>
+        <td>{{row.username}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+```
+
+![](doc/web-02.png)
